@@ -35,13 +35,7 @@ A unique, modern, and fully responsive music player built with vanilla HTML, CSS
 - **Up Arrow** - Increase volume
 - **Down Arrow** - Decrease volume
 - **M** - Mute/Unmute
-
-## 🚀 Getting Started
-
-### Prerequisites
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- No internet connection required - works completely offline
-
+  
 ### Installation
 1. Download all three files to the same folder:
    - `index.html`
