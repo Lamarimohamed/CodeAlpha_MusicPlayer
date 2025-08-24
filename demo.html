@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonPulse Demo - Music Player Showcase</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9InVybCgjZ3JhZGllbnQpIi8+CjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAiIHkxPSIwIiB4Mj0iMzIiIHkyPSIzMiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjOGEyYmUyIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzQwZTBkMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .demo-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .demo-title {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #8a2be2, #40e0d0, #ff6b6b);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .demo-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+        }
+
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(138, 43, 226, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .feature-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .demo-player-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .demo-player-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .demo-player-container {
+            display: inline-block;
+            transform: scale(0.8);
+            transform-origin: top center;
+        }
+
+        .demo-instructions {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .instructions-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .instructions-list {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+        }
+
+        .instructions-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .instructions-list li:last-child {
+            border-bottom: none;
+        }
+
+        .instructions-list li::before {
+            content: '🎵';
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .demo-footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .keyboard-shortcuts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .shortcut-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .shortcut-key {
+            background: rgba(138, 43, 226, 0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .demo-title {
+                font-size: 2rem;
+            }
+            
+            .demo-features {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .demo-player-container {
+                transform: scale(0.7);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-header">
+        <h1 class="demo-title">NeonPulse Music Player</h1>
+        <p class="demo-subtitle">A Futuristic Music Experience Built with Pure HTML, CSS & JavaScript</p>
+    </div>
+
+    <div class="demo-features">
+        <div class="feature-card">
+            <span class="feature-icon">🎨</span>
+            <h3 class="feature-title">Unique Design</h3>
+            <p class="feature-description">Futuristic glassmorphism design with neon accents, rotating backgrounds, and smooth animations that create an immersive visual experience.</p>
+        </div>
+        
+        <div class="feature-card">
+            <span class="feature-icon">🎵</span>
+            <h3 class="feature-title">Full Music Controls</h3>
+            <p class="feature-description">Complete music player functionality including play/pause, next/previous, progress seeking, volume control, and playlist management.</p>
+        </div>
+        
+        <div class="feature-card">
+            <span class="feature-icon">📱</span>
+            <h3 class="feature-title">Responsive Design</h3>
+            <p class="feature-description">Perfectly adapted for all devices - desktop, tablet, and mobile with automatic layout adjustments and touch-friendly controls.</p>
+        </div>
+        
+        <div class="feature-card">
+            <span class="feature-icon">⚡</span>
+            <h3 class="feature-title">Performance Optimized</h3>
+            <p class="feature-description">Built with vanilla JavaScript for maximum performance, no frameworks required, and smooth 60fps animations throughout.</p>
+        </div>
+        
+        <div class="feature-card">
+            <span class="feature-icon">🎹</span>
+            <h3 class="feature-title">Keyboard Shortcuts</h3>
+            <p class="feature-description">Full keyboard support with intuitive shortcuts for play/pause, navigation, volume control, and mute functionality.</p>
+        </div>
+        
+        <div class="feature-card">
+            <span class="feature-icon">🔧</span>
+            <h3 class="feature-title">Easy Customization</h3>
+            <p class="feature-description">Modular code structure makes it easy to customize colors, add new features, or integrate with your own projects.</p>
+        </div>
+    </div>
+
+    <div class="demo-player-section">
+        <h2 class="demo-player-title">Try the Player</h2>
+        <div class="demo-player-container">
+            <iframe src="index.html" width="500" height="700" frameborder="0" style="border-radius: 30px; box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);"></iframe>
+        </div>
+    </div>
+
+    <div class="demo-instructions">
+        <h2 class="instructions-title">How to Use</h2>
+        <ul class="instructions-list">
+            <li><strong>Click the Play Button</strong> - Start playing the current song with beautiful animations</li>
+            <li><strong>Use Navigation Buttons</strong> - Skip to next/previous songs with smooth transitions</li>
+            <li><strong>Drag the Progress Bar</strong> - Click anywhere on the progress bar to seek to that position</li>
+            <li><strong>Adjust Volume</strong> - Use the volume slider or drag the volume handle for precise control</li>
+            <li><strong>Browse Playlist</strong> - Click any song in the playlist to play it immediately</li>
+            <li><strong>Keyboard Shortcuts</strong> - Use Space, Arrow keys, and M for quick control</li>
+        </ul>
+    </div>
+
+    <div class="demo-instructions">
+        <h2 class="instructions-title">Keyboard Shortcuts</h2>
+        <div class="keyboard-shortcuts">
+            <div class="shortcut-item">
+                <span class="shortcut-key">Space</span>
+                <span>Play/Pause</span>
+            </div>
+            <div class="shortcut-item">
+                <span class="shortcut-key">←</span>
+                <span>Previous Song</span>
+            </div>
+            <div class="shortcut-item">
+                <span class="shortcut-key">→</span>
+                <span>Next Song</span>
+            </div>
+            <div class="shortcut-item">
+                <span class="shortcut-key">↑</span>
+                <span>Increase Volume</span>
+            </div>
+            <div class="shortcut-item">
+                <span class="shortcut-key">↓</span>
+                <span>Decrease Volume</span>
+            </div>
+            <div class="shortcut-item">
+                <span class="shortcut-key">M</span>
+                <span>Mute/Unmute</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-footer">
+        <p>&copy; 2025 NeonPulse Music Player. Built using pure HTML, CSS, and JavaScript.</p>
+        <p>Experience the future of music players!</p>
+    </div>
+</body>
+</html>
